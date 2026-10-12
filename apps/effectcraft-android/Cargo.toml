@@ -1,0 +1,21 @@
+[package]
+name = "effectcraft-android-bridge"
+description = "UniFFI bridge from the native Android UI to the EffectCraft engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+name = "effectcraft_android_bridge"
+crate-type = ["cdylib", "rlib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+effectcraft-engine = { workspace = true }
+effectcraft-host = { workspace = true }
+serde_json = { workspace = true }
+uniffi = "0.29.4"

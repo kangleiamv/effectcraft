@@ -8,13 +8,13 @@ does not host the web app.
 ## Build a debug APK
 
 Install Rust 1.95 or newer, the `aarch64-linux-android` Rust target, Android
-SDK Platform 35, Android NDK, Java 17, `cargo-ndk`, and `uniffi-bindgen` 0.29.4.
+SDK Platform 35, Android NDK, Java 17, `cargo-ndk`, and `uniffi-bindgen` 0.29.5.
 Set `JAVA_HOME` to Java 17 or 21 and `ANDROID_HOME` or `ANDROID_SDK_ROOT`, then
 run:
 
 ```sh
 cargo install cargo-ndk
-cargo install uniffi_bindgen --version 0.29.4 --features cli --locked
+cargo install uniffi --version 0.29.5 --features cli --locked
 packaging/android/build.sh
 ```
 

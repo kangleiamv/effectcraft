@@ -151,8 +151,9 @@ impl MobileSession {
 mod tests {
     use super::MobileSession;
     use serde_json::Value;
+    use std::sync::Arc;
 
-    fn test_session() -> (MobileSession, std::path::PathBuf) {
+    fn test_session() -> (Arc<MobileSession>, std::path::PathBuf) {
         let stamp = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos();
         let dir = std::env::temp_dir().join(format!("effectcraft-android-test-{stamp}"));
         std::fs::create_dir_all(&dir).unwrap();

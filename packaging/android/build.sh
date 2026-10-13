@@ -28,14 +28,16 @@ if [[ "$JAVA_MAJOR" != "17" && "$JAVA_MAJOR" != "21" ]]; then
   exit 1
 fi
 
-for tool in cargo cargo-ndk uniffi-bindgen; do
+for tool in cargo cargo-ndk; do
   if ! command -v "$tool" >/dev/null 2>&1; then
     printf 'error: %s is required to build the native Android app\n' "$tool" >&2
     exit 1
   fi
 done
 
-SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+SDK="$ANDROID_HOME"
 if [[ -z "$SDK" || ! -d "$SDK" ]]; then
   printf 'error: set ANDROID_HOME or ANDROID_SDK_ROOT to an installed Android SDK\n' >&2
   exit 1
@@ -43,8 +45,8 @@ fi
 
 cd "$ROOT"
 cargo build --locked --release -p effectcraft-android-bridge
-uniffi-bindgen generate \
-  --library "$HOST_LIB" \
+cargo run --quiet --bin uniffi-bindgen -- generate \
+  --library "$TARGET_ROOT/release/libeffectcraft_android_bridge.so" \
   --language kotlin \
   --out-dir "$APP/build/generated/uniffi" \
   --config "$ROOT/apps/effectcraft-android/uniffi.toml"

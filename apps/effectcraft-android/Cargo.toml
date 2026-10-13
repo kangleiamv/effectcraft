@@ -18,4 +18,8 @@ workspace = true
 effectcraft-engine = { workspace = true }
 effectcraft-host = { workspace = true }
 serde_json = { workspace = true }
-uniffi = "=0.29.5"
+uniffi = { version = "=0.29.5", features = ["cli"] }
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi_bindgen.rs"

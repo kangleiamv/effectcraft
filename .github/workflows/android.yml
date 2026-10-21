@@ -39,9 +39,13 @@ jobs:
 
       - name: Install Android SDK packages
         shell: bash
+        env:
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+          ANDROID_HOME: /usr/local/lib/android/sdk
         run: |
           yes | sdkmanager --licenses
           sdkmanager --install \
+            "cmdline-tools;latest" \
             "platform-tools" \
             "platforms;android-35" \
             "build-tools;35.0.0" \

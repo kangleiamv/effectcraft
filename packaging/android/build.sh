@@ -33,7 +33,7 @@ for tool in cargo cargo-ndk; do
   fi
 done
 
-export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+export ANDROID_HOME="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-$HOME/Android/Sdk}}"
 export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
 SDK="$ANDROID_HOME"
 if [[ -z "$SDK" || ! -d "$SDK" ]]; then

@@ -7,12 +7,10 @@ PROJECT="$ROOT/apps/effectcraft-android/android"
 TARGET_ROOT="${CARGO_TARGET_DIR:-$ROOT/target}"
 HOST_LIB="$TARGET_ROOT/release/libeffectcraft_android_bridge.so"
 
-for tool in java; do
-  if ! command -v "$tool" >/dev/null 2>&1; then
-    printf 'error: %s is required to build the native Android app\n' "$tool" >&2
-    exit 1
-  fi
-done
+if ! command -v java >/dev/null 2>&1; then
+  printf 'error: java is required to build the native Android app\n' >&2
+  exit 1
+fi
 
 JAVA_BIN="$(command -v java)"
 if [[ -n "${JAVA_HOME:-}" ]]; then
@@ -46,7 +44,7 @@ fi
 cd "$ROOT"
 cargo build --locked --release -p effectcraft-android-bridge
 cargo run --quiet --bin uniffi-bindgen -- generate \
-  --library "$TARGET_ROOT/release/libeffectcraft_android_bridge.so" \
+  --library "$HOST_LIB" \
   --language kotlin \
   --out-dir "$APP/build/generated/uniffi" \
   --config "$ROOT/apps/effectcraft-android/uniffi.toml"

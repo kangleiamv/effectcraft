@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -370,8 +369,8 @@ private fun NewCompositionDialog(onDismiss: () -> Unit, onCreate: (String, Int, 
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedTextField(name, { name = it }, label = { Text("Name") }, singleLine = true)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedTextField(width, { width = it }, label = { Text("Width") }, singleLine = true, modifier = Modifier.weight(1f))
-                    OutlinedTextField(height, { height = it }, label = { Text("Height") }, singleLine = true, modifier = Modifier.weight(1f))
+                    OutlinedTextField(width, { width = it }, label = { Text("Width") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                    OutlinedTextField(height, { height = it }, label = { Text("Height") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 }
             }
         },
